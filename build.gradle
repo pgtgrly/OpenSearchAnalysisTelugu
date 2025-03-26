@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.opensearch.gradle:build-tools:${opensearchVersion}"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'opensearch.opensearchplugin'
+
+
+dependencies {
+    api "org.apache.lucene:lucene-analysis-common:9.10.0"
+    implementation "org.apache.logging.log4j:log4j-core:2.21.0"
+
+}
+
+opensearchplugin {
+    name "${pluginName}"
+    description 'Telugu Analyzer Plugin'
+    version '1.0.0'
+    classname 'org.opensearch.plugin.analysis.telugu.TeluguPlugin'
+    licenseFile = rootProject.file('LICENSE.txt')
+    noticeFile = rootProject.file('NOTICE.txt')
+}
+
+jar {
+    archiveBaseName.set(rootProject.name)
+}
+
+licenseHeaders {
+    licenseHeaders.enabled = false
+}
+
+loggerUsageCheck {
+    loggerUsageCheck.enabled = false
+}
+
+testingConventions {
+    testingConventions.enabled = false
+}
+
+validateNebulaPom {
+    validateNebulaPom.enabled = false
+}
